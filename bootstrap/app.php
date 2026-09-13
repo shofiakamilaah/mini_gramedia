@@ -12,7 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        //mendaftarkan middlware agar bisa digunakan
+        $middleware->alias([
+            'isLoggedIn' => App\Http\Middleware\IsLoggedIn::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

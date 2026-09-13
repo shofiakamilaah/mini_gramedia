@@ -20,4 +20,8 @@ Route::get('/login', function () {
 
 Route::post('/login', [UserController::class, 'login'])->name('login.store');
 
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+//kelompok yang boeh diakses hanya setelah login
+Route::middleware(['isLoggedIn'])->group(function(){
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+});
+//menggunakan get karena adanya proses dulu yaitu menghapus sesi
