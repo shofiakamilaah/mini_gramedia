@@ -25,6 +25,10 @@
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
+        <div class="mb-3">
+            <label class="form-label required">Konfirmasi Password</label>
+            <input name="password_confirmation" type="password" class="form-control @error('password') is-invalid @enderror" autocomplete="off" value="{{ old('password_confirmation') }}" />
+        </div>
         <button type="submit" class="btn btn-primary w-100">
             Buat Akun
         </button>

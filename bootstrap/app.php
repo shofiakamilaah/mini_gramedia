@@ -14,7 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         //mendaftarkan middlware agar bisa digunakan
         $middleware->alias([
-            'isLoggedIn' => App\Http\Middleware\IsLoggedIn::class
+            'isLoggedIn' => App\Http\Middleware\IsLoggedIn::class,
+            'isGuest' => App\Http\Middleware\IsGuest::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

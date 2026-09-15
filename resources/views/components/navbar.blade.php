@@ -20,7 +20,21 @@
         <!-- END NAVBAR LOGO -->
 
     <ul class="navbar-nav mx-auto w-50">
-            {{-- DROPDOWN --}}
+        @if (Auth::check() && Auth::user()->role == 'admin')
+            <li class="nav-item-active">
+                <a href="{{ route('admin.dashboard') }}" class="nav-link">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">Kategori Buku</a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">Paket Langganan</a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">Buku</a>
+            </li>
+        @else
+        {{-- DROPDOWN --}}
             <div class="dropdown mt-2">
                 <a href="#"
                     class="btn btn-light dropdown-toggle pt-2 me-2"
@@ -87,6 +101,7 @@
         <div class="mt-3 ms-2">
             <i class="fa-solid fa-cart-arrow-down fs-3 text-dark"></i>
         </div>
+        @endif
     </ul>
 
         <div class="navbar-nav flex-row order-md-last ms-auto">

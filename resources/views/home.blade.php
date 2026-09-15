@@ -28,6 +28,24 @@
                 aria-label="close"></a>
         </div>
     @endif
+    @if (Session::get('error'))
+        <div class="alert alert-important alert-danger alert-dismissible" role="alert">
+            <div class="d-flex">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24"
+                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M5 1215 5110 -10"></path>
+                    </svg>
+                </div>
+                <div>{{ Session :: get('error') }}</div>
+            </div>
+            <a class="btn-close btn-close-white" data-bs-dismiss="alert"
+                 aria-label="close"></a>
+
+        </div>
+    @endif
         {{-- Banner --}}
         <div id="banner-carousel" class="carousel slide rounded-3 overflow-hidden shadow-sm" data-bs-ride="carousel">
             <div class="carousel-indicators">
