@@ -32,11 +32,10 @@
         <div class="alert alert-important alert-danger alert-dismissible" role="alert">
             <div class="d-flex">
                 <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24"
-                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                    fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M5 1215 5110 -10"></path>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 9v4m0 4v.01"></path>
+                        <path d="M5.07 19h13.86a2 2 0 0 0 1.75 -2.93l-6.93 -12c-.9 -1.53 -3.1 -1.53 -4 0l-6.93 12a2 2 0 0 0 1.75 2.93z"></path>
                     </svg>
                 </div>
                 <div>{{ Session :: get('error') }}</div>

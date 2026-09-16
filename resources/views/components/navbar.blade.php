@@ -25,7 +25,7 @@
                 <a href="{{ route('admin.dashboard') }}" class="nav-link">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link">Kategori Buku</a>
+                <a href="{{ route('admin.book-categories.index') }}" class="nav-link" {{ request()->route('admin.book-categories.index') ? 'active' : '' }}>Kategori Buku</a>
             </li>
             <li class="nav-item">
                 <a href="" class="nav-link">Paket Langganan</a>
