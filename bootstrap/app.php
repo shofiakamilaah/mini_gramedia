@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'isLoggedIn' => App\Http\Middleware\IsLoggedIn::class,
             'isGuest' => App\Http\Middleware\IsGuest::class,
             'isAdmin' => App\Http\Middleware\IsAdmin::class,
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

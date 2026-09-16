@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\BookCategoryContorller;
 use App\Http\Controllers\UserController;
-use App\Models\BookCategory;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,17 +12,17 @@ Route::get('/', function () {
 Route::middleware(['isLoggedIn'])->group(function(){
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-    //prefix untuk mengelompokan route admin yang path nya diawli dengan /admin
-    //seluruh route pada kelompok ini akan memiliki nama route diawali dangan admin. contoh: admin.dashboard
-    Route::prefix('admin')->name('admin.')->middleware(['isAdmin'])->group(function(){
+    // nama route diawali dangan admin. contoh: admin.dashboard
+ Route::middleware(['isAdmin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
         })->name('dashboard');
 
-        
-        Route::resource('book-categories', BookCategoryContorller::class);
+Route::resource('book-categories', BookCategoryController::class);
     });
-
 });
 //menggunakan get karena adanya proses dulu yaitu menghapus sesi
 Route::middleware(['isGuest'])->group(function(){
