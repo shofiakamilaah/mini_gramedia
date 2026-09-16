@@ -24,6 +24,7 @@
             <li class="nav-item-active">
                 <a href="{{ route('admin.dashboard') }}" class="nav-link">Dashboard</a>
             </li>
+             {{-- request()->route() mengecek apakah route saat ini sesuai dengan route yang ditentukan. fungsinya untuk memberikan class active yang nantinya akan berwarna biru pada link yang sedang aktif--}}
             <li class="nav-item">
                 <a href="{{ route('admin.book-categories.index') }}" class="nav-link" {{ request()->route('admin.book-categories.index') ? 'active' : '' }}>Kategori Buku</a>
             </li>
