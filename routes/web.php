@@ -19,6 +19,12 @@ Route::middleware(['isLoggedIn'])->group(function(){
             return view('admin.dashboard');
         })->name('dashboard');
     });
+
+    Route::middleware(['isAdmin'])->group(function () {
+        Route::get('/admin/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
+    });
 });
 //menggunakan get karena adanya proses dulu yaitu menghapus sesi
 Route::middleware(['isGuest'])->group(function(){
