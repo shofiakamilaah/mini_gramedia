@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->string('color');
+            $table->string('color')->default('#000000');
             $table->integer('price');
             $table->timestamps();
         });

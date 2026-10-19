@@ -2,26 +2,30 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookCategoryController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/kategori/{bookCategory}', [BookCategoryController::class, 'showCategory'])
+    ->name('categories.show');
 
 //kelompok yang boeh diakses hanya setelah login
 Route::middleware(['isLoggedIn'])->group(function(){
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-    // nama route diawali dangan admin. contoh: admin.dashboard
- Route::middleware(['isAdmin'])
-    ->prefix('admin')
-    ->name('admin.')
-    ->group(function () {
+    //prefix untuk mengelompokan route admin yang path nya diawli dengan /admin
+    //seluruh route pada kelompok ini akan memiliki nama route diawali dangan admin. contoh: admin.dashboard
+    Route::prefix('admin')->name('admin.')->middleware(['isAdmin'])->group(function(){
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
         })->name('dashboard');
 
-Route::resource('book-categories', BookCategoryController::class);
+    Route::resource('book-categories', BookCategoryController::class);
+    Route::resource('subscriptions', SubscriptionController::class);
+    Route::resource('books', BookController::class);
     });
 });
 //menggunakan get karena adanya proses dulu yaitu menghapus sesi

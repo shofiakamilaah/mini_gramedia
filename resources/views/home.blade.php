@@ -104,103 +104,65 @@
                 </div>
 
                 <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="card h-100" style="background: linear-gradient(135deg, #ffffff 0%, #a7fc06 100%);">
-                            <div class="card-body row">
-                                <div class="col-4"></div>
-                                <div class="col-6 text-center text-dark">
-                                    <h2 style="font-weight: bold;">NON-FICION</h2>
-                                    <p class="text-secondary" style="font-weight: bold; margin: 0; !important">PACKAGE</p>
-                                    <div>
-                                        Rp <span style="font-size: 2rem;
-                                                font-weight: bold;
-                                                " class="text-warning">
-                                                49.000
+
+                    {{-- Paket dari database --}}
+                    @foreach ($subscriptionPackages as $subscription)
+                        <div class="col-md-4">
+                            <div
+                                class="card h-100"
+                                style="background: linear-gradient(135deg, #ffffff 0%, {{ $subscription->color }} 100%);"
+                            >
+                                <div class="card-body row">
+                                    <div class="col-4"></div>
+
+                                    <div class="col-6 text-center text-dark">
+                                        <h2 style="font-weight: bold;">
+                                            {{ strtoupper($subscription->name) }}
+                                        </h2>
+
+                                        <p
+                                            class="text-secondary"
+                                            style="font-weight: bold; margin: 0 !important;"
+                                        >
+                                            PACKAGE
+                                        </p>
+
+                                        <div>
+                                            Rp
+                                            <span
+                                                style="font-size: 2rem; font-weight: bold;"
+                                                class="text-warning"
+                                            >
+                                                {{ number_format($subscription->price, 0, ',', '.') }}
                                             </span>
 
                                             <br>
-                                            <span style="font-weight: bold;
-                                                    margin: 0;
-                                                    !important"
-                                                    class="text-secondary">
 
-                                                    /30 DAY
+                                            <span
+                                                style="font-weight: bold; margin: 0 !important;"
+                                                class="text-secondary"
+                                            >
+                                                {{ ($subscription->description) }}
                                             </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-
-                    <div class="col-md-4">
-                        <div class="card h-100" style="background: linear-gradient(135deg, #ffffff 0%, #06b6fc 100%);">
-                            <div class="card-body row">
-                                <div class="col-4"></div>
-                                <div class="col-6 text-center text-dark">
-                                    <h2 style="font-weight: bold;">FICION</h2>
-                                    <p class="text-secondary" style="font-weight: bold; margin: 0; !important">PACKAGE</p>
-                                    <div>
-                                        Rp <span style="font-size: 2rem;
-                                                font-weight: bold;
-                                                " class="text-warning">
-                                                100.000
-                                            </span>
-
-                                            <br>
-                                            <span style="font-weight: bold;
-                                                    margin: 0;
-                                                    !important"
-                                                    class="text-secondary">
-
-                                                    /30 DAY
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card h-100" style="background: linear-gradient(135deg, #ffffff 0%, #f7d011 100%);">
-                            <div class="card-body row">
-                                <div class="col-4"></div>
-                                <div class="col-6 text-center text-dark">
-                                    <h2 style="font-weight: bold;">PREMIUM</h2>
-                                    <p class="text-secondary" style="font-weight: bold; margin: 0; !important">PACKAGE</p>
-                                    <div>
-                                        Rp <span style="font-size: 2rem;
-                                                font-weight: bold;
-                                                " class="text-warning">
-                                                100.000
-                                            </span>
-
-                                            <br>
-                                            <span style="font-weight: bold;
-                                                    margin: 0;
-                                                    !important"
-                                                    class="text-secondary">
-
-                                                    /30 DAY
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
-
+{{-- BUKU BARU  --}}
         <div class="mt-4">
             <div class="d-flex  align-items-center gap-2 mb-4">
                 <h2 class="text-dark" style="font-weight: bold;">Buku Baru Dirilis</h2>
             </div>
             <div id="wrapper-slider">
-
-                <div class="col-md-3 px-2">
+            @forelse ($latestBooks as $book)
+                <div class="px-2">
                     <div class="card h-100 border-0 shadow-sm package-card">
                         <div class="card-body text-center p-0">
                             <img class="d-block w-100 rounded-top" alt="Buku 1"
-                                src="https://bukukita.com/babacms/displaybuku/117296_f.jpg">
+                                src="{{ asset($book->cover) }}">
                         </div>
                         <div class="card-footer bg-white border-0 text-start p-3 rounded-bottom">
                             <div class="d-flex gap-2 mb-3">
@@ -209,133 +171,15 @@
                                 <span class="badge bg-primary text-white">3+</span>
                             </div>
 
-                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Tere Liye</span></h5>
-                                <h5 style="font-size:1rem;"><span>Tentang Kamu</span></h5>
-                                <h6 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h6>
+                            <h5><span style="font-size: 0.8rem;" class="text-secondary">{{ $book->writer }}</span></h5>
+                                <h5 style="font-size:1rem;"><span>{{ $book->title }}</span></h5>
+                                <h6 style="font-size: 1.2rem; font-weight: bold;">Rp {{ number_format($book->price, 0, ',', '.') }}</h6>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-3 px-2">
-                    <div class="card h-100 border-0 shadow-sm package-card">
-                        <div class="card-body text-center p-0">
-                            <img class="d-block w-100 rounded-top" alt="Buku 1"
-                                src="https://bukukita.com/babacms/displaybuku/117296_f.jpg">
-                        </div>
-                        <div class="card-footer bg-white border-0 text-start p-3 rounded-bottom">
-                            <div class="d-flex gap-2 mb-3">
-                                <span class="badge bg-secondary text-white"><i class="fa-solid fa-mobile-screen"></i>
-                                    E-Book</span>
-                                <span class="badge bg-primary text-white">3+</span>
-                            </div>
-
-                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Tere Liye</span></h5>
-                                <h5 style="font-size:1rem;"><span>Tentang Kamu</span></h5>
-                                <h6 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h6>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-3 px-2">
-                    <div class="card h-100 border-0 shadow-sm package-card">
-                        <div class="card-body text-center p-0">
-                            <img class="d-block w-100 rounded-top" alt="Buku 1"
-                                src="https://bukukita.com/babacms/displaybuku/117296_f.jpg">
-                        </div>
-                        <div class="card-footer bg-white border-0 text-start p-3 rounded-bottom">
-                            <div class="d-flex gap-2 mb-3">
-                                <span class="badge bg-secondary text-white"><i class="fa-solid fa-mobile-screen"></i>
-                                    E-Book</span>
-                                <span class="badge bg-primary text-white">3+</span>
-                            </div>
-
-                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Tere Liye</span></h5>
-                                <h5 style="font-size:1rem;"><span>Tentang Kamu</span></h5>
-                                <h6 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 px-2">
-                    <div class="card h-100 border-0 shadow-sm package-card">
-                        <div class="card-body text-center p-0">
-                            <img class="d-block w-100 rounded-top" alt="Buku 1"
-                                src="https://bukukita.com/babacms/displaybuku/117296_f.jpg">
-                        </div>
-                        <div class="card-footer bg-white border-0 text-start p-3 rounded-bottom">
-                            <div class="d-flex gap-2 mb-3">
-                                <span class="badge bg-secondary text-white"><i class="fa-solid fa-mobile-screen"></i>
-                                    E-Book</span>
-                                <span class="badge bg-primary text-white">3</span>
-                            </div>
-
-                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Tere Liye</span></h5>
-                                <h5 style="font-size:1rem;"><span>Tentang Kamu</span></h5>
-                                <h6 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 px-2">
-                    <div class="card h-100 border-0 shadow-sm package-card">
-                        <div class="card-body text-center p-0">
-                            <img class="d-block w-100 rounded-top" alt="Buku 1"
-                                src="https://bukukita.com/babacms/displaybuku/117296_f.jpg">
-                        </div>
-                        <div class="card-footer bg-white border-0 text-start p-3 rounded-bottom">
-                            <div class="d-flex gap-2 mb-3">
-                                <span class="badge bg-secondary text-white"><i class="fa-solid fa-mobile-screen"></i>
-                                    E-Book</span>
-                                <span class="badge bg-primary text-white">3+</span>
-                            </div>
-
-                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Tere Liye</span></h5>
-                                <h5 style="font-size:1rem;"><span>Tentang Kamu</span></h5>
-                                <h6 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 px-2">
-                    <div class="card h-100 border-0 shadow-sm package-card">
-                        <div class="card-body text-center p-0">
-                            <img class="d-block w-100 rounded-top" alt="Buku 1"
-                                src="https://bukukita.com/babacms/displaybuku/117296_f.jpg">
-                        </div>
-                        <div class="card-footer bg-white border-0 text-start p-3 rounded-bottom">
-                            <div class="d-flex gap-2 mb-3">
-                                <span class="badge bg-secondary text-white"><i class="fa-solid fa-mobile-screen"></i>
-                                    E-Book</span>
-                                <span class="badge bg-primary text-white">3+</span>
-                            </div>
-
-                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Tere Liye</span></h5>
-                                <h5 style="font-size:1rem;"><span>Tentang Kamu</span></h5>
-                                <h6 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 px-2">
-                    <div class="card h-100 border-0 shadow-sm package-card">
-                        <div class="card-body text-center p-0">
-                            <img class="d-block w-100 rounded-top" alt="Buku 1"
-                                src="https://bukukita.com/babacms/displaybuku/117296_f.jpg">
-                        </div>
-                        <div class="card-footer bg-white border-0 text-start p-3 rounded-bottom">
-                            <div class="d-flex gap-2 mb-3">
-                                <span class="badge bg-secondary text-white"><i class="fa-solid fa-mobile-screen"></i>
-                                    E-Book</span>
-                                <span class="badge bg-primary text-white">3+</span>
-                            </div>
-
-                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Tere Liye</span></h5>
-                                <h5 style="font-size:1rem;"><span>Tentang Kamu</span></h5>
-                                <h6 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h6>
-                        </div>
-                    </div>
-                </div>
+            @empty
+                <p class="text-center">Tidak ada buku terbaru yang tersedia.</p>
+            @endforelse
             </div>
         </div>
 
@@ -345,12 +189,13 @@
                 <h2 class="mt-3 text-dark" style="font-weight: bold">Buku Gratis</h2>
             </div>
             <div class="row">
+                @forelse($freeBooks as $book)
                 <div class="col-4">
                     <div class="card d-flex flex-column">
                         <div class="row row-0 flex-fill">
                             <div class="col-md-3">
                                 <a href="#">
-                                    <img src="https://images.jdmagicbox.com/quickquotes/images_main/book-cover-2013218651-5dnl1sz8.jpg"
+                                    <img src="{{ asset($book->cover) }}"
                                     class="w-100 h-100 object-cover" alt="Card side image" />
                                 </a>
                             </div>
@@ -361,155 +206,22 @@
                                     </h3>
                                     <div class="text-secondary">
                                         Penulis
-                                        <br><span class="text-dark">Judul Buku</span>
+                                        <br><span class="text-dark">{{ $book->writer }}</span>
                                     </div>
                                     <div class="d-flex align-items-center pt-4 mt-auto">
-                                        <h3><span class="text-decoration-line-through text-secondary">Rp 50.000</span> <span
-                                        class="text-dark">Rp 0</span></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card d-flex flex-column">
-                        <div class="row row-0 flex-fill">
-                            <div class="col-md-3">
-                                <a href="#">
-                                    <img src="https://images.jdmagicbox.com/quickquotes/images_main/book-cover-2013218651-5dnl1sz8.jpg"
-                                    class="w-100 h-100 object-cover" alt="Card side image" />
-                                </a>
-                            </div>
-                            <div class="col">
-                                <div class="card-body h-full d-flex flex-column">
-                                    <h3 class="card-title">
-                                        <div class="badge"><i class="fa-solid fa-mobile"></i>PDF</div>
+                                        <h3><span class="text-decoration-line-through text-secondary">Rp {{ number_format($book->price, 0, ',', '.') }}</span>
+                                            {{-- <span class="text-dark">Rp 0</span> --}}
                                     </h3>
-                                    <div class="text-secondary">
-                                        Penulis
-                                        <br><span class="text-dark">Judul Buku</span>
-                                    </div>
-                                    <div class="d-flex align-items-center pt-4 mt-auto">
-                                        <h3><span class="text-decoration-line-through text-secondary">Rp 50.000</span> <span
-                                        class="text-dark">Rp 0</span></h3>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                @empty
+                    <p class="text-center">Tidak ada buku gratis yang tersedia.</p>
+                @endforelse
 
-                <div class="col-4">
-                    <div class="card d-flex flex-column">
-                        <div class="row row-0 flex-fill">
-                            <div class="col-md-3">
-                                <a href="#">
-                                    <img src="https://images.jdmagicbox.com/quickquotes/images_main/book-cover-2013218651-5dnl1sz8.jpg"
-                                    class="w-100 h-100 object-cover" alt="Card side image" />
-                                </a>
-                            </div>
-                            <div class="col">
-                                <div class="card-body h-full d-flex flex-column">
-                                    <h3 class="card-title">
-                                        <div class="badge"><i class="fa-solid fa-mobile"></i>PDF</div>
-                                    </h3>
-                                    <div class="text-secondary">
-                                        Penulis
-                                        <br><span class="text-dark">Judul Buku</span>
-                                    </div>
-                                    <div class="d-flex align-items-center pt-4 mt-auto">
-                                        <h3><span class="text-decoration-line-through text-secondary">Rp 50.000</span> <span
-                                        class="text-dark">Rp 0</span></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-4">
-                    <div class="card d-flex flex-column">
-                        <div class="row row-0 flex-fill">
-                            <div class="col-md-3">
-                                <a href="#">
-                                    <img src="https://images.jdmagicbox.com/quickquotes/images_main/book-cover-2013218651-5dnl1sz8.jpg"
-                                    class="w-100 h-100 object-cover" alt="Card side image" />
-                                </a>
-                            </div>
-                            <div class="col">
-                                <div class="card-body h-full d-flex flex-column">
-                                    <h3 class="card-title">
-                                        <div class="badge"><i class="fa-solid fa-mobile"></i>PDF</div>
-                                    </h3>
-                                    <div class="text-secondary">
-                                        Penulis
-                                        <br><span class="text-dark">Judul Buku</span>
-                                    </div>
-                                    <div class="d-flex align-items-center pt-4 mt-auto">
-                                        <h3><span class="text-decoration-line-through text-secondary">Rp 50.000</span> <span
-                                        class="text-dark">Rp 0</span></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-4">
-                    <div class="card d-flex flex-column">
-                        <div class="row row-0 flex-fill">
-                            <div class="col-md-3">
-                                <a href="#">
-                                    <img src="https://images.jdmagicbox.com/quickquotes/images_main/book-cover-2013218651-5dnl1sz8.jpg"
-                                    class="w-100 h-100 object-cover" alt="Card side image" />
-                                </a>
-                            </div>
-                            <div class="col">
-                                <div class="card-body h-full d-flex flex-column">
-                                    <h3 class="card-title">
-                                        <div class="badge"><i class="fa-solid fa-mobile"></i>PDF</div>
-                                    </h3>
-                                    <div class="text-secondary">
-                                        Penulis
-                                        <br><span class="text-dark">Judul Buku</span>
-                                    </div>
-                                    <div class="d-flex align-items-center pt-4 mt-auto">
-                                        <h3><span class="text-decoration-line-through text-secondary">Rp 50.000</span> <span
-                                        class="text-dark">Rp 0</span></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card d-flex flex-column">
-                        <div class="row row-0 flex-fill">
-                            <div class="col-md-3">
-                                <a href="#">
-                                    <img src="https://images.jdmagicbox.com/quickquotes/images_main/book-cover-2013218651-5dnl1sz8.jpg"
-                                    class="w-100 h-100 object-cover" alt="Card side image" />
-                                </a>
-                            </div>
-                            <div class="col">
-                                <div class="card-body h-full d-flex flex-column">
-                                    <h3 class="card-title">
-                                        <div class="badge"><i class="fa-solid fa-mobile"></i>PDF</div>
-                                    </h3>
-                                    <div class="text-secondary">
-                                        Penulis
-                                        <br><span class="text-dark">Judul Buku</span>
-                                    </div>
-                                    <div class="d-flex align-items-center pt-4 mt-auto">
-                                        <h3><span class="text-decoration-line-through text-secondary">Rp 50.000</span> <span
-                                        class="text-dark">Rp 0</span></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
